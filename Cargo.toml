@@ -1,0 +1,23 @@
+[package]
+name = "ec"
+version = "0.1.0"
+edition = "2024"
+authors = ["Jarro van Ginkel"]
+default-run = "ec"
+
+[lib]
+doctest = false
+
+[dependencies]
+# Required for template generation
+clap = { version = "4.2.7", features = ["derive"] }
+reqwest = { version = "0.12", features = ["blocking", "cookies", "json"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+aes = "0.8"
+cbc = "0.1"
+hex = "0.4"
+block-padding = "0.3"
+
+# Dependencies for solutions
+itertools = "0.14.0"
