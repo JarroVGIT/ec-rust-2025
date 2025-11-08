@@ -12,7 +12,7 @@ pub fn read_input_file(quest: u8, part: u8) -> String {
 
     match fs::read_to_string(&filepath) {
         Ok(content) => content,
-        Err(_) => String::new()
+        Err(_) => String::new(),
     }
 }
 
@@ -24,8 +24,7 @@ pub fn read_example_file(quest: u8, part: u8) -> String {
         .join("inputs")
         .join("examples")
         .join(format!("{:02}-{}.txt", quest, part));
-    fs::read_to_string(filepath)
-        .expect("could not open example file")
+    fs::read_to_string(filepath).expect("could not open example file")
 }
 
 /// Creates the solution macro for quest binaries

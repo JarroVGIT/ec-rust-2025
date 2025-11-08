@@ -6,21 +6,33 @@ ec::solution!(3);
 
 #[allow(unused_variables)]
 pub fn part_one(notes: &str) -> Option<String> {
-    let result: HashSet<i32> = notes.split(',').map(str::parse).map(Result::unwrap).collect();
+    let result: HashSet<i32> = notes
+        .split(',')
+        .map(str::parse)
+        .map(Result::unwrap)
+        .collect();
     let result = result.into_iter().sum::<i32>();
     Some(format!("{result}"))
 }
 
 #[allow(unused_variables)]
 pub fn part_two(notes: &str) -> Option<String> {
-    let result: BTreeSet<i32> = notes.split(',').map(str::parse).map(Result::unwrap).collect();
+    let result: BTreeSet<i32> = notes
+        .split(',')
+        .map(str::parse)
+        .map(Result::unwrap)
+        .collect();
     let result = result.into_iter().take(20).sum::<i32>();
     Some(format!("{result}"))
 }
 
 #[allow(unused_variables)]
 pub fn part_three(notes: &str) -> Option<String> {
-    let crates: HashMap<i32, usize> = notes.split(',').map(str::parse).map(Result::unwrap).counts();
+    let crates: HashMap<i32, usize> = notes
+        .split(',')
+        .map(str::parse)
+        .map(Result::unwrap)
+        .counts();
     let result = crates.into_values().max().unwrap();
     Some(format!("{result}"))
 }

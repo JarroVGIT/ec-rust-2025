@@ -17,7 +17,7 @@ pub fn determine_next_part(quest: u8) -> u8 {
     }
 
     // If all exist, default to 1
-    1 
+    1
 }
 
 /// Creates the directory structure and files for a quest
@@ -73,7 +73,11 @@ fn download_input(quest: u8, part: u8) -> Result<String, Box<dyn std::error::Err
 }
 
 /// Runs a quest solution
-pub fn solve_quest(quest: u8, part: Option<u8>, submit: bool) -> Result<(), Box<dyn std::error::Error>> {
+pub fn solve_quest(
+    quest: u8,
+    part: Option<u8>,
+    submit: bool,
+) -> Result<(), Box<dyn std::error::Error>> {
     use std::process::Stdio;
 
     let quest_str = format!("{:02}", quest);

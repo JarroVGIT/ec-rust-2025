@@ -5,11 +5,11 @@ ec::solution!(2);
 #[derive(Debug, Clone, Copy, Default)]
 struct Complex {
     real: i64,
-    imag: i64
+    imag: i64,
 }
 
 impl Complex {
-    fn new(real: i64, imag:i64) -> Self {
+    fn new(real: i64, imag: i64) -> Self {
         Complex { real, imag }
     }
 }
@@ -17,11 +17,11 @@ impl Complex {
 impl From<&str> for Complex {
     fn from(value: &str) -> Self {
         // expects [X,Y] format
-        let (real,imag) = value.split_once(',').unwrap();
+        let (real, imag) = value.split_once(',').unwrap();
         let real: i64 = real.strip_prefix("[").and_then(|v| v.parse().ok()).unwrap();
         let imag: i64 = imag.strip_suffix("]").and_then(|v| v.parse().ok()).unwrap();
         Complex { real, imag }
-    }   
+    }
 }
 
 impl From<Complex> for String {
@@ -34,10 +34,10 @@ impl From<Complex> for String {
 impl Add for Complex {
     type Output = Self;
     fn add(self, rhs: Self) -> Self::Output {
-        Complex { 
+        Complex {
             real: self.real + rhs.real,
-            imag: self.imag + rhs.imag
-         }
+            imag: self.imag + rhs.imag,
+        }
     }
 }
 
@@ -69,11 +69,10 @@ pub fn part_one(notes: &str) -> Option<String> {
     let a = Complex::from(notes.split_once('=').unwrap().1);
     for _ in 0..3 {
         r = r * r;
-        r = r / Complex::new(10,10);
+        r = r / Complex::new(10, 10);
         r = r + a;
     }
     Some(r.into())
-
 }
 
 #[allow(unused_variables)]
@@ -83,18 +82,20 @@ pub fn part_two(notes: &str) -> Option<String> {
     for x in 0..101 {
         for y in 0..101 {
             let p = Complex::new(start.real + (x * 10), start.imag + (y * 10));
-            let mut r = Complex::new(0,0);
+            let mut r = Complex::new(0, 0);
             let mut engrave = true;
             for _ in 0..100 {
                 r = r * r;
-                r = r / Complex::new(100000,100000);
+                r = r / Complex::new(100000, 100000);
                 r = r + p;
                 if r.real > 1000000 || r.real < -1000000 || r.imag > 1000000 || r.imag < -1000000 {
                     engrave = false;
                     break;
                 }
             }
-            if engrave { count += 1; }
+            if engrave {
+                count += 1;
+            }
         }
     }
     Some(format!("{count}"))
@@ -107,18 +108,20 @@ pub fn part_three(notes: &str) -> Option<String> {
     for x in 0..1001 {
         for y in 0..1001 {
             let p = Complex::new(start.real + x, start.imag + y);
-            let mut r = Complex::new(0,0);
+            let mut r = Complex::new(0, 0);
             let mut engrave = true;
             for _ in 0..100 {
                 r = r * r;
-                r = r / Complex::new(100000,100000);
+                r = r / Complex::new(100000, 100000);
                 r = r + p;
                 if r.real > 1000000 || r.real < -1000000 || r.imag > 1000000 || r.imag < -1000000 {
                     engrave = false;
                     break;
                 }
             }
-            if engrave { count += 1; }
+            if engrave {
+                count += 1;
+            }
         }
     }
     Some(format!("{count}"))

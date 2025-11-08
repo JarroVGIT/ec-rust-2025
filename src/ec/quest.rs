@@ -10,7 +10,8 @@ impl Quest {
     }
 
     pub fn from_str(s: &str) -> Result<Self, String> {
-        let day = s.parse::<u8>()
+        let day = s
+            .parse::<u8>()
             .map_err(|_| format!("Invalid quest number: {}", s))?;
 
         if day == 0 {

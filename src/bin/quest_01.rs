@@ -4,7 +4,6 @@ use itertools::Itertools;
 
 ec::solution!(1);
 
-
 // Arvaris,Felmardrith,Fyndtyr,Vaelorath,Orahgonn,Brivor,Zraalvor,Bryndin,Varinmarn,Sorphor
 
 // L1,R5,L9,R7,L2,R5,L2,R2,L4,R5,L1
@@ -13,16 +12,19 @@ ec::solution!(1);
 pub fn part_one(notes: &str) -> Option<String> {
     let lines = notes.lines().collect_vec();
     let names = lines[0].split(',').collect_vec();
-    let moves = lines[2].split(',').map(|m| {
-        let (dir, steps) = m.split_at(1);
-        (dir, steps.parse::<usize>().unwrap())
-    }).collect_vec();
+    let moves = lines[2]
+        .split(',')
+        .map(|m| {
+            let (dir, steps) = m.split_at(1);
+            (dir, steps.parse::<usize>().unwrap())
+        })
+        .collect_vec();
     let mut pos: usize = 0;
     let max_pos = names.len() - 1;
     for (dir, steps) in moves {
         match dir {
             "L" => pos = pos.saturating_sub(steps),
-            _ => pos = max_pos.min(pos + steps)
+            _ => pos = max_pos.min(pos + steps),
         }
     }
     Some(names[pos].to_string())
@@ -32,10 +34,13 @@ pub fn part_one(notes: &str) -> Option<String> {
 pub fn part_two(notes: &str) -> Option<String> {
     let lines = notes.lines().collect_vec();
     let mut names: VecDeque<_> = lines[0].split(',').collect();
-    let moves = lines[2].split(',').map(|m| {
-        let (dir, steps) = m.split_at(1);
-        (dir, steps.parse::<usize>().unwrap())
-    }).collect_vec();
+    let moves = lines[2]
+        .split(',')
+        .map(|m| {
+            let (dir, steps) = m.split_at(1);
+            (dir, steps.parse::<usize>().unwrap())
+        })
+        .collect_vec();
 
     for (dir, steps) in moves {
         match dir {
@@ -48,29 +53,33 @@ pub fn part_two(notes: &str) -> Option<String> {
 
 #[allow(unused_variables)]
 pub fn part_three(notes: &str) -> Option<String> {
-        let lines = notes.lines().collect_vec();
+    let lines = notes.lines().collect_vec();
     let mut names: Vec<_> = lines[0].split(',').collect();
-    let moves = lines[2].split(',').map(|m| {
-        let (dir, steps) = m.split_at(1);
-        (dir, steps.parse::<usize>().unwrap())
-    }).collect_vec();
+    let moves = lines[2]
+        .split(',')
+        .map(|m| {
+            let (dir, steps) = m.split_at(1);
+            (dir, steps.parse::<usize>().unwrap())
+        })
+        .collect_vec();
     let len = names.len() as i32;
     for (dir, steps) in moves {
-                let idx = match dir {
+        let idx = match dir {
             "L" => {
                 // L3 means 3rd from the end
                 // Wrap if steps > len
                 let wrapped = steps % names.len();
                 names.len() - wrapped
-            },
+            }
             "R" => {
-                // R3 means index 3, use mod to wrap around. 
+                // R3 means index 3, use mod to wrap around.
                 steps % names.len()
-            },
-            _ => panic!("Invalid direction: {}", dir)
+            }
+            _ => panic!("Invalid direction: {}", dir),
         };
-        
-        if idx != 0 {  // Don't swap with self
+
+        if idx != 0 {
+            // Don't swap with self
             names.swap(0, idx);
         }
     }
