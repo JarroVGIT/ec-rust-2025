@@ -57,7 +57,7 @@ fn is_valid_name(name: &str, rules: &HashMap<char, Vec<char>>) -> bool {
     let chars: Vec<_> = name.chars().collect();
     chars
         .windows(2)
-        .all(|w| rules.get(&w[0]).map_or(true, |rule| rule.contains(&w[1])))
+        .all(|w| rules.get(&w[0]).map_or(false, |rule| rule.contains(&w[1])))
 }
 
 #[allow(unused_variables)]
