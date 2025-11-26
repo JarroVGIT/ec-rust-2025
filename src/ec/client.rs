@@ -9,7 +9,7 @@ use std::path::PathBuf;
 type Aes256CbcDec = Decryptor<Aes256>;
 
 const BASE_URL: &str = "https://everybody.codes";
-const CDN_URL: &str = "https://everybody-codes.b-cdn.net";
+const CDN_URL: &str = "https://everybody.codes";
 
 #[derive(Debug)]
 pub enum ClientError {
